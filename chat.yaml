@@ -1,0 +1,29 @@
+pools:
+  - id: Chat pool              
+    gun:
+      type: top-gun
+      target: http://localhost:8080
+      prefix: username
+      pollers: 500
+      delay: 10
+    ammo:
+      type: dummy
+    result:
+      type: phout          
+      destination: ./phout.log   
+
+    rps: 
+      - type: const
+        ops: 0
+        duration: 60s
+      - type: line 
+        from: 250
+        to: 2000
+        duration: 300s
+
+    startup:
+      type: once
+      times: 100
+
+log:
+  level: info
